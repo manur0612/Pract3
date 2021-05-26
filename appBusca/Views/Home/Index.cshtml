@@ -1,8 +1,29 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model List<Producto>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Lista de solicitudes</h1>
+
+<table class="table border">
+    
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Nombre</td>
+            <td>@item.Foto</td>
+            <td>@item.Descripcion</td>
+            <td>@item.Precio</td>
+            <td>@item.Celular</td>
+            <td>@item.lugar</td>
+            <td>@item.Comprador</td>
+            <td>@item.Categoria</td>        
+           
+        </tr>
+    }
+    @if (Model.Count == 0) {
+        <tr>
+            <td colspan="3" class="text-center">No se encontraron solicitudes de compra</td>
+        </tr>
+    }
+</table>
+
+<a href="/Producto/NuevoProducto" class="btn btn-primary">Añadir Solicitud</a>

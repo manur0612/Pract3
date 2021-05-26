@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using appBusca.Models;
+using appBusca.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace appBusca.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly BuscaDbContext _context;
+        public HomeController(BuscaDbContext context) {
+            _context = context;
+        }
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -20,6 +26,7 @@ namespace appBusca.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Productos = _context.Productos.ToList().Select(r => new SelectListItem(r.Nombre, r.Id.ToString()));
             return View();
         }
 
